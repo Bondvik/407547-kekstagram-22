@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
-* Студент: [Viktoriia Bondarenko](https://up.htmlacademy.ru/javascript/22/user/407547).
-* Наставник: `Неизвестно`.
+- Студент: [Viktoriia Bondarenko](https://up.htmlacademy.ru/javascript/22/user/407547).
+- Наставник: [Алексей Белявский](https://htmlacademy.ru/profile/id666435).
 
 ---
 
