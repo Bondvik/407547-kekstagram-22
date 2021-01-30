@@ -1,7 +1,7 @@
 const COMMENT_LENGTH = 140;
 
-const getMaxLengthComment = function (comment, max) {
-  return (comment.length < max) ? true : false;
+const getMaxLengthComment = function (comment) {
+  return (comment.length < COMMENT_LENGTH) ? true : false;
 };
 
 
@@ -26,3 +26,6 @@ const getRandomNumber = function(min, max) {
   return Math.floor(Math.random() * (b - a + 1)) + a;
 
 };
+
+getMaxLengthComment('absd');
+getRandomNumber(1, 10);
