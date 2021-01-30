@@ -6,8 +6,8 @@ const getMaxLengthComment = function (comment) {
 
 //Источник: https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Math/random
 const getRandomNumber = function(min, max) {
-  let firstNumber =  Math.ceil(min);
-  let secondNumber = Math.floor(max);
+  let minValue =  Math.ceil(min);
+  let maxValue = Math.floor(max);
   if (min < 0 || max < 0) {
     return;
   }
@@ -15,10 +15,10 @@ const getRandomNumber = function(min, max) {
     return min;
   }
   if (min > max) {
-    firstNumber = Math.ceil(max);
-    secondNumber = Math.floor(min);
+    minValue = Math.ceil(max);
+    maxValue = Math.floor(min);
   }
-  return Math.floor(Math.random() * (secondNumber - firstNumber + 1)) + firstNumber;
+  return Math.floor(Math.random() * (maxValue - minValue + 1)) + minValue;
 };
 getMaxLengthComment('absd');
 getRandomNumber(1, 10);
