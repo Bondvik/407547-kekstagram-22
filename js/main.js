@@ -1,16 +1,17 @@
 const COMMENT_LENGTH = 140;
-const PHOTOS_TOTAL = 25;
-const LIKES = {
-  min: 15,
-  max: 200,
-}
+const Photos = {
+  TOTAL: 25,
+};
+const Likes = {
+  MIN: 15,
+  MAX: 200,
+};
+const Comments = {
+  MIN: 0,
+  MAX: 10,
+};
 
-const COMMENTS = {
-  min: 0,
-  max: 10,
-}
-
-const DESCRIPTIONS = [
+const descriptions = [
   'Обожаю валяться на пляже!',
   'Вот в таком чудесном настроении, я придумываю новые идеи и проекты',
   'Делюсь тем, от чего кайфую',
@@ -23,7 +24,7 @@ const DESCRIPTIONS = [
   'Ну просто нереальная красота!',
 ];
 
-const NAMES = [
+const names = [
   'Ольга',
   'Андрей',
   'Лиля',
@@ -40,7 +41,7 @@ const NAMES = [
 ];
 
 
-const MESSAGES = [
+const messages = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
   'Когда вы делаете фотографию, хорошо бы убирать палец из кадра. В конце концов это просто непрофессионально.',
@@ -74,40 +75,34 @@ getMaxLengthComment('absd');
 
 const getRandomArrayElement = function (elemets) {
   return elemets[getRandomNumber(0, elemets.length - 1)];
-}
+};
 
 const createPhoto = function (index) {
   return {
-    id: index + 1,
-    url: `photos/${index + 1}.jpg`,
-    description: getRandomArrayElement(DESCRIPTIONS),
-    likes: getRandomNumber(LIKES.min, LIKES.max),
-    comments: photoComments(),
+    id: index,
+    url: `photos/${index}.jpg`,
+    description: getRandomArrayElement(descriptions),
+    likes: getRandomNumber(Likes.MIN, Likes.MAX),
+    comments: createPhotoComments(),
   }
-}
+};
 
 const createComment = function(index) {
   return {
-    id: index + 1,
+    id: index,
     avatar: `img/avatar-${getRandomNumber(1, 6)}.svg`,
-    message: getRandomArrayElement(MESSAGES),
-    name: getRandomArrayElement(NAMES),
+    message: getRandomArrayElement(messages),
+    name: getRandomArrayElement(names),
   }
+};
 
-}
-
-const photoComments = function () {
-  let commentsTotal = getRandomNumber(COMMENTS.min, COMMENTS.max);
-  if (commentsTotal !== 0) {
-    return new Array(commentsTotal).fill(null).map((item, index) => createComment(index))
-  } else {
-    return 0;
-  }
-}
-
+const createPhotoComments = function () {
+  let commentsTotal = getRandomNumber(Comments.MIN, Comments.MAX);
+  return new Array(commentsTotal).fill(null).map((item, index) => createComment(index + 1))
+};
 
 const puplicPhotos = function () {
-  return new Array(PHOTOS_TOTAL).fill(null).map((item, index) => createPhoto(index));
-}
+  return new Array(Photos.TOTAL).fill(null).map((item, index) => createPhoto(index + 1));
+};
 
 puplicPhotos();
