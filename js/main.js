@@ -77,17 +77,17 @@ const getRandomArrayElement = function (elemets) {
   return elemets[getRandomNumber(0, elemets.length - 1)];
 };
 
-const createPhoto = function (index) {
+const getPhoto = function (index) {
   return {
     id: index,
     url: `photos/${index}.jpg`,
     description: getRandomArrayElement(descriptions),
     likes: getRandomNumber(Likes.MIN, Likes.MAX),
-    comments: createPhotoComments(),
+    comments: getPhotoComments(),
   }
 };
 
-const createComment = function(index) {
+const getComment = function(index) {
   return {
     id: index,
     avatar: `img/avatar-${getRandomNumber(1, 6)}.svg`,
@@ -96,13 +96,13 @@ const createComment = function(index) {
   }
 };
 
-const createPhotoComments = function () {
+const getPhotoComments = function () {
   let commentsTotal = getRandomNumber(Comments.MIN, Comments.MAX);
-  return new Array(commentsTotal).fill(null).map((item, index) => createComment(index + 1))
+  return new Array(commentsTotal).fill(null).map((item, index) => getComment(index + 1))
 };
 
-const puplicPhotos = function () {
-  return new Array(Photos.TOTAL).fill(null).map((item, index) => createPhoto(index + 1));
+const getPublicPhotos = function () {
+  return new Array(Photos.TOTAL).fill(null).map((item, index) => getPhoto(index + 1));
 };
 
-puplicPhotos();
+getPublicPhotos();
