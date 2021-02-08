@@ -73,7 +73,7 @@ const getRandomNumber = function(min, max) {
 
 getMaxLengthComment('absd');
 
-const getRandomArrayElement = function (elemets) {
+const getRandomElement = function (elemets) {
   return elemets[getRandomNumber(0, elemets.length - 1)];
 };
 
@@ -81,7 +81,7 @@ const getPhoto = function (index) {
   return {
     id: index,
     url: `photos/${index}.jpg`,
-    description: getRandomArrayElement(descriptions),
+    description: getRandomElement(descriptions),
     likes: getRandomNumber(Likes.MIN, Likes.MAX),
     comments: getPhotoComments(),
   }
@@ -91,8 +91,8 @@ const getComment = function(index) {
   return {
     id: index,
     avatar: `img/avatar-${getRandomNumber(1, 6)}.svg`,
-    message: getRandomArrayElement(messages),
-    name: getRandomArrayElement(names),
+    message: getRandomElement(messages),
+    name: getRandomElement(names),
   }
 };
 
