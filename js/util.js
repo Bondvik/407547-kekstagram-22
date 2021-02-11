@@ -1,7 +1,5 @@
 const COMMENT_LENGTH = 140;
-const getMaxLengthComment = function (comment) {
-  return (comment.length < COMMENT_LENGTH) ? true : false;
-};
+const getMaxLengthComment = (comment) => comment.length < COMMENT_LENGTH;
 
 //Источник: https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Math/random
 const getRandomNumber = function(min, max) {
