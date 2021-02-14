@@ -1,5 +1,7 @@
 import {getRandomNumber} from './util.js';
 
+let allData = null;
+
 const Photos = {
   TOTAL: 25,
 };
@@ -81,7 +83,12 @@ const getPhotoComments = function () {
 };
 
 const getPublicPhotos = function () {
-  return new Array(Photos.TOTAL).fill(null).map((item, index) => getPhoto(index + 1));
+  allData = new Array(Photos.TOTAL).fill(null).map((item, index) => getPhoto(index + 1));
+  return allData;
 };
 
-export {getPublicPhotos};
+const getElement = (id) => {
+  return allData[id];
+}
+
+export {getPublicPhotos, getElement};
