@@ -1,3 +1,4 @@
 import {getPublicPhotos} from './data.js';
+import {createPicture} from './create-picture.js';
 
-getPublicPhotos();
+createPicture(getPublicPhotos());
