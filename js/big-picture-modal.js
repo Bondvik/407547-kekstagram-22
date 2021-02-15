@@ -2,25 +2,24 @@ import {getPhotosElement} from './data.js';
 import {createComment} from './create-comment.js';
 
 const bigPictureElement = document.querySelector('.big-picture');
-const body = document.body;
+const bodyElement = document.body;
 const bigPictureCloseElement = document.querySelector('.big-picture__cancel');
 
 const bigPictureCloseElementHandler = function () {
   bigPictureElement.classList.add('hidden');
-  body.classList.remove('modal-open');
+  bodyElement.classList.remove('modal-open');
 }
 
-const pictureElementHandler =  function (pictureElement) {
-  return (evt) => {
-    evt.preventDefault();
+const pictureListElementHandler =  function (evt) {
+  evt.preventDefault();
+  if (evt.target.className === 'picture__img') {
     bigPictureElement.classList.remove('hidden');
-    body.classList.add('modal-open');
+    bodyElement.classList.add('modal-open');
     closeBigPictureModal();
-
     const bigPictureImageElement = bigPictureElement.querySelector('.big-picture__img img');
     const likes = bigPictureElement.querySelector('.likes-count');
     const comments = bigPictureElement.querySelector('.comments-count');
-    const pictureElementId = pictureElement.getAttribute('data-img-id');
+    const pictureElementId = evt.target.dataset.imgId;
     const description = bigPictureElement.querySelector('.social__caption');
     const commentList = document.querySelector('.social__comments');
     const socialCommentCountElement = bigPictureElement.querySelector('.social__comment-count');
@@ -48,10 +47,8 @@ const closeBigPictureModal = function () {
 }
 
 const openBigPictureModal = function () {
-  const pictures = document.querySelectorAll('.picture__img');
-  pictures.forEach((pictureElement) => {
-    pictureElement.addEventListener('click', pictureElementHandler(pictureElement))
-  })
+  const pictureListElement = document.querySelector('.pictures');
+  pictureListElement.addEventListener('click', pictureListElementHandler);
 }
 
 export {openBigPictureModal};

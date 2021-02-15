@@ -1,16 +1,12 @@
-const createComment = (element) => {
+import {createAvatar} from './create-avatar.js';
+import {createMessage} from './create-message.js';
+
+const createComment = function (element) {
   const li = document.createElement('li');
   li.classList.add('social__comment');
-  const img = document.createElement('img');
-  img.classList.add('social__picture');
-  img.src = element.avatar;
-  img.alt = element.name;
-  const text = document.createElement('p');
-  text.classList.add('social__text');
-  text.textContent = element.message;
-  li.appendChild(img);
-  li.appendChild(text);
+  li.appendChild(createAvatar(element));
+  li.appendChild(createMessage(element));
   return li;
 };
 
-export{createComment};
+export {createComment};
