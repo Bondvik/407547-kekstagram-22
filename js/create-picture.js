@@ -1,4 +1,4 @@
-import {addListener} from './full-size-picture-modal.js';
+import {openBigPictureModal} from './big-picture-modal.js';
 
 const createPicture = (pictures) => {
   const pictureListElement = document.querySelector('.pictures');
@@ -13,9 +13,8 @@ const createPicture = (pictures) => {
     pictureElement.querySelector('.picture__comments').textContent = picture.comments.length;
     pictureListFragment.appendChild(pictureElement);
   })
-
   pictureListElement.appendChild(pictureListFragment);
-  addListener();
+  openBigPictureModal();
 }
 
 export {createPicture};
