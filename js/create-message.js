@@ -1,8 +1,8 @@
 const createMessage = function (element) {
-  const text = document.createElement('p');
-  text.classList.add('social__text');
-  text.textContent = element.message;
-  return text;
+  const textElement = document.createElement('p');
+  textElement.classList.add('social__text');
+  textElement.textContent = element.message;
+  return textElement;
 };
 
 export {createMessage};

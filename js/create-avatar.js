@@ -1,9 +1,9 @@
 const createAvatar = function (element) {
-  const img = document.createElement('img');
-  img.classList.add('social__picture');
-  img.src = element.avatar;
-  img.alt = element.name;
-  return img;
+  const imageElement = document.createElement('img');
+  imageElement.classList.add('social__picture');
+  imageElement.src = element.avatar;
+  imageElement.alt = element.name;
+  return imageElement;
 };
 
 export {createAvatar};
