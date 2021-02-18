@@ -6,7 +6,7 @@ const scaleControlBiggerElement = document.querySelector('.scale__control--bigge
 const scaleControlSmallerElement = document.querySelector('.scale__control--smaller');
 const scaleControlValueElement = document.querySelector('.scale__control--value');
 const imgUploadPreview = document.querySelector('.img-upload__preview img');
-const effectsListElement = document.querySelector('.effects__list');
+const effectsItemElement = document.querySelectorAll('.effects__item');
 const bodyElement = document.body;
 
 const uploadLabelElementClickHandler = function (evt) {
@@ -17,24 +17,14 @@ const uploadLabelElementClickHandler = function (evt) {
   changeEffects();
 };
 
-const getParentElement = function (element, className) {
-  if (!element.parentElement) {
-    return null;
-  }
-  if (!element.classList.contains(className)) {
-    element = getParentElement(element.parentElement, className);
-  }
-  return element;
-};
 
-const effectsListElementClickHandler = function (evt) {
-  const parentElement = getParentElement(evt.target, 'effects__item');
-  if (!parentElement) {
+const effectItemElementClickHandler = function () {
+  const effectRadioElement = this.querySelector('input');
+  if (!effectRadioElement) {
     return;
   }
-  const changeEffectElement = parentElement.querySelector('.effects__radio');
   imgUploadPreview.className = '';
-  switch (changeEffectElement.id) {
+  switch (effectRadioElement.id) {
     case 'effect-chrome':
       imgUploadPreview.classList.add('effects__preview--chrome');
       break;
@@ -54,13 +44,16 @@ const effectsListElementClickHandler = function (evt) {
 };
 
 const changeEffects = function () {
-  effectsListElement.addEventListener('click', effectsListElementClickHandler);
+  const effectItemListElement = Array.from(effectsItemElement);
+  effectItemListElement.forEach( (effectItemElement) => effectItemElement.addEventListener('click', effectItemElementClickHandler));
 }
+
 //Меняем масштаб превью
 const adjustNewScale = function (newScale) {
   scaleControlValueElement.value = `${newScale}%`;
   imgUploadPreview.style.transform = `scale(${newScale / 100})`;
 };
+
 //Увеличиваем фото
 const scaleControlBiggerElementClickHandler = function () {
   let currentImageSize = parseInt(scaleControlValueElement.value);
@@ -68,9 +61,10 @@ const scaleControlBiggerElementClickHandler = function () {
     let newImageSize = currentImageSize + RESIZE_STEP;
     adjustNewScale(newImageSize);
   }
-}
+};
 
 scaleControlBiggerElement.addEventListener('click', scaleControlBiggerElementClickHandler);
+
 //Уменьшаем фото
 const scaleControlSmallerElementClickHandler = function () {
   let currentImageSize = parseInt(scaleControlValueElement.value);
@@ -78,14 +72,14 @@ const scaleControlSmallerElementClickHandler = function () {
     let newImageSize = currentImageSize - RESIZE_STEP;
     adjustNewScale(newImageSize);
   }
-}
+};
 
 scaleControlSmallerElement.addEventListener('click', scaleControlSmallerElementClickHandler);
 
 const uploadCancelElementClickHandler = function () {
   uploadOverlayElement.classList.add('hidden');
   bodyElement.classList.remove('modal-open');
-}
+};
 
 const closeUploadModal = function () {
   uploadCancelElement.addEventListener('click', uploadCancelElementClickHandler);
