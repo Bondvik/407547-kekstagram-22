@@ -1,7 +1,8 @@
-import {toogleClassElement} from './util.js';
+import {toogleClassElement, effects} from './util.js';
+import './nouislider.js';
 
 const imgUploadPreview = document.querySelector('.img-upload__preview img');
-const effectsItemElement = Array.from(document.querySelectorAll('.effects__item'));
+const effectsListElement = document.querySelector('.effects__list');
 const effectLevelSliderElement = document.querySelector('.effect-level__slider');
 const effectLevelValueElement = document.querySelector('.effect-level__value');
 
@@ -12,8 +13,8 @@ const filtersClassName = {
   phobos: 'effects__preview--phobos',
   heat: 'effects__preview--heat',
 };
-// eslint-disable-next-line no-undef
-noUiSlider.create(effectLevelSliderElement, {
+
+window.noUiSlider.create(effectLevelSliderElement, {
   range: {
     min: 0,
     max: 100,
@@ -48,8 +49,13 @@ effectLevelSliderElement.noUiSlider.on('update', (values, handle) => {
   }
 });
 
-const effectItemElementClickHandler = function () {
-  const effectRadioElement = this.querySelector('input');
+const effectsListElementClickHandler = function (evt) {
+  const pathListElement = evt.path;
+  const effectsItemElement = pathListElement.find((pathElement) => pathElement.classList.contains('effects__item'));
+  if (!effectsItemElement) {
+    return;
+  }
+  const effectRadioElement = effectsItemElement.querySelector('input');
   if (!effectRadioElement) {
     return;
   }
@@ -58,74 +64,43 @@ const effectItemElementClickHandler = function () {
     case 'effect-none':
       toogleClassElement(effectLevelSliderElement, 'hidden', true);
       imgUploadPreview.style.filter = 'none';
+      effectRadioElement.value = 'none';
       break;
     case 'effect-chrome':
       toogleClassElement(effectLevelSliderElement, 'hidden', false);
       imgUploadPreview.classList.add(filtersClassName.chrome);
-      effectLevelSliderElement.noUiSlider.updateOptions({
-        range: {
-          min: 0,
-          max: 1,
-        },
-        start: 1,
-        step: 0.1,
-      });
+      effectRadioElement.value = 'chrome';
+      effectLevelSliderElement.noUiSlider.updateOptions(effects.chrome);
       break;
     case 'effect-sepia':
       toogleClassElement(effectLevelSliderElement, 'hidden', false);
       imgUploadPreview.classList.add(filtersClassName.sepia);
-      effectLevelSliderElement.noUiSlider.updateOptions({
-        range: {
-          min: 0,
-          max: 1,
-        },
-        start: 1,
-        step: 0.1,
-      });
+      effectRadioElement.value = 'sepia';
+      effectLevelSliderElement.noUiSlider.updateOptions(effects.sepia);
       break;
     case 'effect-marvin':
       toogleClassElement(effectLevelSliderElement, 'hidden', false);
       imgUploadPreview.classList.add(filtersClassName.marvin);
-      effectLevelSliderElement.noUiSlider.updateOptions({
-        range: {
-          min: 0,
-          max: 100,
-        },
-        start: 100,
-        step: 1,
-      });
+      effectRadioElement.value = 'marvin';
+      effectLevelSliderElement.noUiSlider.updateOptions(effects.marvin);
       break;
     case 'effect-phobos':
       toogleClassElement(effectLevelSliderElement, 'hidden', false);
       imgUploadPreview.classList.add(filtersClassName.phobos);
-      effectLevelSliderElement.noUiSlider.updateOptions({
-        range: {
-          min: 0,
-          max: 3,
-        },
-        start: 3,
-        step: 0.1,
-      });
+      effectRadioElement.value = 'phobos';
+      effectLevelSliderElement.noUiSlider.updateOptions(effects.phobos);
       break;
     case 'effect-heat':
       toogleClassElement(effectLevelSliderElement, 'hidden', false);
       imgUploadPreview.classList.add(filtersClassName.heat);
-      effectLevelSliderElement.noUiSlider.updateOptions({
-        range: {
-          min: 1,
-          max: 3,
-        },
-        start: 3,
-        step: 0.1,
-      });
+      effectRadioElement.value = 'heat';
+      effectLevelSliderElement.noUiSlider.updateOptions(effects.heat);
       break;
   }
 }
 
 const choiceFilterEffect = function () {
-  effectsItemElement.forEach( (effectItemElement) => {
-    effectItemElement.addEventListener('click', effectItemElementClickHandler);
-  })
+  effectsListElement.addEventListener('click', effectsListElementClickHandler);
 }
 
 export {choiceFilterEffect};
