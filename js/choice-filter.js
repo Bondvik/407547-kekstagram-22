@@ -1,3 +1,5 @@
+import {toogleClassElement} from './util.js';
+
 const imgUploadPreview = document.querySelector('.img-upload__preview img');
 const effectsItemElement = Array.from(document.querySelectorAll('.effects__item'));
 const effectLevelSliderElement = document.querySelector('.effect-level__slider');
@@ -54,17 +56,11 @@ const effectItemElementClickHandler = function () {
   imgUploadPreview.className = '';
   switch (effectRadioElement.id) {
     case 'effect-none':
+      toogleClassElement(effectLevelSliderElement, 'hidden', true);
       imgUploadPreview.style.filter = 'none';
-      effectLevelSliderElement.noUiSlider.updateOptions({
-        range: {
-          min: 0,
-          max: 100,
-        },
-        start: 100,
-        step: 0,
-      });
       break;
     case 'effect-chrome':
+      toogleClassElement(effectLevelSliderElement, 'hidden', false);
       imgUploadPreview.classList.add(filtersClassName.chrome);
       effectLevelSliderElement.noUiSlider.updateOptions({
         range: {
@@ -76,6 +72,7 @@ const effectItemElementClickHandler = function () {
       });
       break;
     case 'effect-sepia':
+      toogleClassElement(effectLevelSliderElement, 'hidden', false);
       imgUploadPreview.classList.add(filtersClassName.sepia);
       effectLevelSliderElement.noUiSlider.updateOptions({
         range: {
@@ -87,6 +84,7 @@ const effectItemElementClickHandler = function () {
       });
       break;
     case 'effect-marvin':
+      toogleClassElement(effectLevelSliderElement, 'hidden', false);
       imgUploadPreview.classList.add(filtersClassName.marvin);
       effectLevelSliderElement.noUiSlider.updateOptions({
         range: {
@@ -98,6 +96,7 @@ const effectItemElementClickHandler = function () {
       });
       break;
     case 'effect-phobos':
+      toogleClassElement(effectLevelSliderElement, 'hidden', false);
       imgUploadPreview.classList.add(filtersClassName.phobos);
       effectLevelSliderElement.noUiSlider.updateOptions({
         range: {
@@ -109,6 +108,7 @@ const effectItemElementClickHandler = function () {
       });
       break;
     case 'effect-heat':
+      toogleClassElement(effectLevelSliderElement, 'hidden', false);
       imgUploadPreview.classList.add(filtersClassName.heat);
       effectLevelSliderElement.noUiSlider.updateOptions({
         range: {

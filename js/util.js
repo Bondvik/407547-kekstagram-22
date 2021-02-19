@@ -19,4 +19,12 @@ const getRandomNumber = function(min, max) {
   }
   return Math.floor(Math.random() * (maxValue - minValue + 1)) + minValue;
 };
-export {getRandomNumber, getMaxLengthComment};
+
+const toogleClassElement = function (element, className, toogle) {
+  if (toogle) {
+    element.classList.add(className);
+  } else {
+    element.classList.remove(className);
+  }
+};
+export {getRandomNumber, getMaxLengthComment, toogleClassElement};
