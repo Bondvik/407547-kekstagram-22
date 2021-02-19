@@ -1,5 +1,5 @@
 import {choiceFilterEffect} from './choice-filter.js';
-import {toogleClassElement} from './util.js';
+import {toogleClassElement, isEscEvent} from './util.js';
 
 const RESIZE_STEP = 25;
 const DEFAULT_SCALE = 50;
@@ -14,10 +14,24 @@ const imgUploadPreview = document.querySelector('.img-upload__preview img');
 const effectLevelSliderElement = document.querySelector('.effect-level__slider');
 const bodyElement = document.body;
 
+const onPopupEscKeydown = (evt) => {
+  if (isEscEvent(evt)) {
+    evt.preventDefault();
+    closeImgModal();
+  }
+};
+
+const closeImgModal = () => {
+  uploadOverlayElement.classList.add('hidden');
+  bodyElement.classList.remove('modal-open');
+  document.removeEventListener('keydown', onPopupEscKeydown);
+};
+
 const uploadLabelElementClickHandler = function (evt) {
   evt.preventDefault();
   uploadOverlayElement.classList.remove('hidden');
   bodyElement.classList.add('modal-open');
+  document.addEventListener('keydown', onPopupEscKeydown);
   toogleClassElement(effectLevelSliderElement, 'hidden', true);
   imgUploadPreview.style.filter = 'none';
   imgUploadPreview.style.transform = `scale(${DEFAULT_SCALE / 100})`;
@@ -55,8 +69,7 @@ const scaleControlSmallerElementClickHandler = function () {
 scaleControlSmallerElement.addEventListener('click', scaleControlSmallerElementClickHandler);
 
 const uploadCancelElementClickHandler = function () {
-  uploadOverlayElement.classList.add('hidden');
-  bodyElement.classList.remove('modal-open');
+  closeImgModal();
 };
 
 const closeUploadModal = function () {
@@ -65,7 +78,7 @@ const closeUploadModal = function () {
 
 const openUploadModal = function () {
   imgUploadPreview.style.transform = `scale(${parseInt(scaleControlValueElement.value) / 100})`;
-  uploadLabelElement.addEventListener('click', uploadLabelElementClickHandler)
+  uploadLabelElement.addEventListener('click', uploadLabelElementClickHandler);
 };
 
 export {openUploadModal};

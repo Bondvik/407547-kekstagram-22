@@ -27,4 +27,9 @@ const toogleClassElement = function (element, className, toogle) {
     element.classList.remove(className);
   }
 };
-export {getRandomNumber, getMaxLengthComment, toogleClassElement};
+
+const isEscEvent = (evt) => {
+  return evt.key === ('Escape' || 'Esc');
+};
+
+export {getRandomNumber, getMaxLengthComment, toogleClassElement, isEscEvent};

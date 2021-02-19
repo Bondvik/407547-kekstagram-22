@@ -1,13 +1,26 @@
 import {getPhotosElement} from './data.js';
 import {createComment} from './create-comment.js';
+import {isEscEvent} from './util.js';
 
 const bigPictureElement = document.querySelector('.big-picture');
 const bodyElement = document.body;
 const bigPictureCloseElement = document.querySelector('.big-picture__cancel');
 
-const bigPictureCloseElementHandler = function () {
+const onPopupEscKeydown = (evt) => {
+  if (isEscEvent(evt)) {
+    evt.preventDefault();
+    closebigPictureModal();
+  }
+};
+
+const closebigPictureModal = () => {
   bigPictureElement.classList.add('hidden');
   bodyElement.classList.remove('modal-open');
+  document.removeEventListener('keydown', onPopupEscKeydown);
+};
+
+const bigPictureCloseElementHandler = function () {
+  closebigPictureModal();
 }
 
 const pictureListElementClickHandler =  function (evt) {
@@ -18,6 +31,7 @@ const pictureListElementClickHandler =  function (evt) {
   bigPictureElement.classList.remove('hidden');
   bodyElement.classList.add('modal-open');
   closeBigPictureModal();
+  document.addEventListener('keydown', onPopupEscKeydown);
   const bigPictureImageElement = bigPictureElement.querySelector('.big-picture__img img');
   const likes = bigPictureElement.querySelector('.likes-count');
   const comments = bigPictureElement.querySelector('.comments-count');
