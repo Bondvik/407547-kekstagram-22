@@ -1,13 +1,13 @@
 import {getPhotosElement} from './data.js';
 import {createComment} from './create-comment.js';
-import {isEscEvent} from './util.js';
+import {ESC_KEY} from './util.js';
 
 const bigPictureElement = document.querySelector('.big-picture');
 const bodyElement = document.body;
 const bigPictureCloseElement = document.querySelector('.big-picture__cancel');
 
 const onPopupEscKeydown = (evt) => {
-  if (isEscEvent(evt)) {
+  if (evt.key === ESC_KEY) {
     evt.preventDefault();
     closebigPictureModal();
   }

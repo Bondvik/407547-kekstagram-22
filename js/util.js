@@ -1,3 +1,4 @@
+const ESC_KEY = 'Escape' || 'Esc';
 const COMMENT_LENGTH = 140;
 const getMaxLengthComment = function (comment) {
   return (comment.length < COMMENT_LENGTH) ? true : false;
@@ -18,18 +19,6 @@ const getRandomNumber = function(min, max) {
     maxValue = Math.floor(min);
   }
   return Math.floor(Math.random() * (maxValue - minValue + 1)) + minValue;
-};
-
-const toogleClassElement = function (element, className, toogle) {
-  if (toogle) {
-    element.classList.add(className);
-  } else {
-    element.classList.remove(className);
-  }
-};
-
-const isEscEvent = (evt) => {
-  return evt.key === ('Escape' || 'Esc');
 };
 
 const effects = {
@@ -75,4 +64,4 @@ const effects = {
   },
 }
 
-export {getRandomNumber, getMaxLengthComment, toogleClassElement, isEscEvent, effects};
+export {getRandomNumber, getMaxLengthComment, ESC_KEY, effects};

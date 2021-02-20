@@ -1,5 +1,5 @@
 import {choiceFilterEffect} from './choice-filter.js';
-import {toogleClassElement, isEscEvent} from './util.js';
+import {ESC_KEY} from './util.js';
 
 const RESIZE_STEP = 25;
 const DEFAULT_SCALE = 50;
@@ -15,7 +15,7 @@ const effectLevelSliderElement = document.querySelector('.effect-level__slider')
 const bodyElement = document.body;
 
 const onPopupEscKeydown = (evt) => {
-  if (isEscEvent(evt)) {
+  if (evt.key === ESC_KEY) {
     evt.preventDefault();
     closeImgModal();
   }
@@ -32,7 +32,7 @@ const uploadLabelElementClickHandler = function (evt) {
   uploadOverlayElement.classList.remove('hidden');
   bodyElement.classList.add('modal-open');
   document.addEventListener('keydown', onPopupEscKeydown);
-  toogleClassElement(effectLevelSliderElement, 'hidden', true);
+  effectLevelSliderElement.classList.toggle('hidden', true);
   imgUploadPreview.style.filter = 'none';
   imgUploadPreview.style.transform = `scale(${DEFAULT_SCALE / 100})`;
   scaleControlValueElement.value = `${DEFAULT_SCALE}%`;

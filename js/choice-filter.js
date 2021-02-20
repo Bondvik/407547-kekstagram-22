@@ -1,4 +1,4 @@
-import {toogleClassElement, effects} from './util.js';
+import {effects} from './util.js';
 import './nouislider.js';
 
 const imgUploadPreview = document.querySelector('.img-upload__preview img');
@@ -49,9 +49,16 @@ effectLevelSliderElement.noUiSlider.on('update', (values, handle) => {
   }
 });
 
+const addEffectsToPhoto = function (effectClassName, radioElement) {
+  const effectKey = effectClassName.split('-')[1];
+  effectLevelSliderElement.classList.toggle('hidden', false);
+  imgUploadPreview.classList.add(filtersClassName[effectKey]);
+  radioElement.value = effectKey;
+  effectLevelSliderElement.noUiSlider.updateOptions(effects[effectKey]);
+};
+
 const effectsListElementClickHandler = function (evt) {
-  const pathListElement = evt.path;
-  const effectsItemElement = pathListElement.find((pathElement) => pathElement.classList.contains('effects__item'));
+  const effectsItemElement = evt.path.find((pathElement) => pathElement.classList.contains('effects__item'));
   if (!effectsItemElement) {
     return;
   }
@@ -60,47 +67,17 @@ const effectsListElementClickHandler = function (evt) {
     return;
   }
   imgUploadPreview.className = '';
-  switch (effectRadioElement.id) {
-    case 'effect-none':
-      toogleClassElement(effectLevelSliderElement, 'hidden', true);
-      imgUploadPreview.style.filter = 'none';
-      effectRadioElement.value = 'none';
-      break;
-    case 'effect-chrome':
-      toogleClassElement(effectLevelSliderElement, 'hidden', false);
-      imgUploadPreview.classList.add(filtersClassName.chrome);
-      effectRadioElement.value = 'chrome';
-      effectLevelSliderElement.noUiSlider.updateOptions(effects.chrome);
-      break;
-    case 'effect-sepia':
-      toogleClassElement(effectLevelSliderElement, 'hidden', false);
-      imgUploadPreview.classList.add(filtersClassName.sepia);
-      effectRadioElement.value = 'sepia';
-      effectLevelSliderElement.noUiSlider.updateOptions(effects.sepia);
-      break;
-    case 'effect-marvin':
-      toogleClassElement(effectLevelSliderElement, 'hidden', false);
-      imgUploadPreview.classList.add(filtersClassName.marvin);
-      effectRadioElement.value = 'marvin';
-      effectLevelSliderElement.noUiSlider.updateOptions(effects.marvin);
-      break;
-    case 'effect-phobos':
-      toogleClassElement(effectLevelSliderElement, 'hidden', false);
-      imgUploadPreview.classList.add(filtersClassName.phobos);
-      effectRadioElement.value = 'phobos';
-      effectLevelSliderElement.noUiSlider.updateOptions(effects.phobos);
-      break;
-    case 'effect-heat':
-      toogleClassElement(effectLevelSliderElement, 'hidden', false);
-      imgUploadPreview.classList.add(filtersClassName.heat);
-      effectRadioElement.value = 'heat';
-      effectLevelSliderElement.noUiSlider.updateOptions(effects.heat);
-      break;
+  if (effectRadioElement.id === 'effect-none') {
+    effectLevelSliderElement.classList.toggle('hidden', true);
+    imgUploadPreview.style.filter = 'none';
+    effectRadioElement.value = 'none';
+  } else {
+    addEffectsToPhoto(effectRadioElement.id, effectRadioElement);
   }
-}
+};
 
 const choiceFilterEffect = function () {
   effectsListElement.addEventListener('click', effectsListElementClickHandler);
-}
+};
 
 export {choiceFilterEffect};
