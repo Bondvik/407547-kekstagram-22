@@ -1,7 +1,7 @@
 import {effects} from './util.js';
 import './nouislider.js';
 
-const imgUploadPreview = document.querySelector('.img-upload__preview img');
+const uploadPreviewElement = document.querySelector('.img-upload__preview img');
 const effectsListElement = document.querySelector('.effects__list');
 const effectLevelSliderElement = document.querySelector('.effect-level__slider');
 const effectLevelValueElement = document.querySelector('.effect-level__value');
@@ -36,25 +36,29 @@ effectLevelValueElement.value = 0;
 
 effectLevelSliderElement.noUiSlider.on('update', (values, handle) => {
   effectLevelValueElement.value = values[handle];
-  if (imgUploadPreview.classList.contains(filtersClassName.chrome)) {
-    imgUploadPreview.style.filter = `grayscale(${effectLevelValueElement.value})`;
-  } else if (imgUploadPreview.classList.contains(filtersClassName.sepia)) {
-    imgUploadPreview.style.filter = `sepia(${effectLevelValueElement.value})`;
-  } else if (imgUploadPreview.classList.contains(filtersClassName.marvin)) {
-    imgUploadPreview.style.filter = `invert(${effectLevelValueElement.value}%)`;
-  } else if (imgUploadPreview.classList.contains(filtersClassName.phobos)) {
-    imgUploadPreview.style.filter = `blur(${effectLevelValueElement.value}px)`;
-  } else if (imgUploadPreview.classList.contains(filtersClassName.heat)) {
-    imgUploadPreview.style.filter = `brightness(${effectLevelValueElement.value})`;
+  if (uploadPreviewElement.classList.contains(filtersClassName.chrome)) {
+    uploadPreviewElement.style.filter = `grayscale(${effectLevelValueElement.value})`;
+  } else if (uploadPreviewElement.classList.contains(filtersClassName.sepia)) {
+    uploadPreviewElement.style.filter = `sepia(${effectLevelValueElement.value})`;
+  } else if (uploadPreviewElement.classList.contains(filtersClassName.marvin)) {
+    uploadPreviewElement.style.filter = `invert(${effectLevelValueElement.value}%)`;
+  } else if (uploadPreviewElement.classList.contains(filtersClassName.phobos)) {
+    uploadPreviewElement.style.filter = `blur(${effectLevelValueElement.value}px)`;
+  } else if (uploadPreviewElement.classList.contains(filtersClassName.heat)) {
+    uploadPreviewElement.style.filter = `brightness(${effectLevelValueElement.value})`;
   }
 });
 
-const addEffectsToPhoto = function (effectClassName, radioElement) {
-  const effectKey = effectClassName.split('-')[1];
-  effectLevelSliderElement.classList.toggle('hidden', false);
-  imgUploadPreview.classList.add(filtersClassName[effectKey]);
-  radioElement.value = effectKey;
-  effectLevelSliderElement.noUiSlider.updateOptions(effects[effectKey]);
+const addEffectsToPhoto = function (radioElement) {
+  if (radioElement.dataset.effect === 'none') {
+    effectLevelSliderElement.classList.toggle('hidden', true);
+    uploadPreviewElement.style.filter = radioElement.dataset.effect;
+  } else {
+    effectLevelSliderElement.classList.toggle('hidden', false);
+    uploadPreviewElement.classList.add(filtersClassName[radioElement.dataset.effect]);
+    effectLevelSliderElement.noUiSlider.updateOptions(effects[radioElement.dataset.effect]);
+  }
+  radioElement.value = radioElement.dataset.effect;
 };
 
 const effectsListElementClickHandler = function (evt) {
@@ -66,14 +70,8 @@ const effectsListElementClickHandler = function (evt) {
   if (!effectRadioElement) {
     return;
   }
-  imgUploadPreview.className = '';
-  if (effectRadioElement.id === 'effect-none') {
-    effectLevelSliderElement.classList.toggle('hidden', true);
-    imgUploadPreview.style.filter = 'none';
-    effectRadioElement.value = 'none';
-  } else {
-    addEffectsToPhoto(effectRadioElement.id, effectRadioElement);
-  }
+  uploadPreviewElement.className = '';
+  addEffectsToPhoto(effectRadioElement);
 };
 
 const choiceFilterEffect = function () {

@@ -14,11 +14,11 @@ const uploadCancelElement = document.querySelector('.img-upload__cancel');
 const scaleControlBiggerElement = document.querySelector('.scale__control--bigger');
 const scaleControlSmallerElement = document.querySelector('.scale__control--smaller');
 const scaleControlValueElement = document.querySelector('.scale__control--value');
-const imgUploadPreview = document.querySelector('.img-upload__preview img');
+const uploadPreviewElement = document.querySelector('.img-upload__preview img');
 const effectLevelSliderElement = document.querySelector('.effect-level__slider');
 const bodyElement = document.body;
 
-const onPopupEscKeydown = (evt) => {
+const popupEscKeydownHandler = (evt) => {
   if (evt.key === ESC_KEY) {
     evt.preventDefault();
     closeImgModal();
@@ -28,17 +28,17 @@ const onPopupEscKeydown = (evt) => {
 const closeImgModal = () => {
   uploadOverlayElement.classList.add('hidden');
   bodyElement.classList.remove('modal-open');
-  document.removeEventListener('keydown', onPopupEscKeydown);
+  document.removeEventListener('keydown', popupEscKeydownHandler);
 };
 
 const uploadLabelElementClickHandler = function (evt) {
   evt.preventDefault();
   uploadOverlayElement.classList.remove('hidden');
   bodyElement.classList.add('modal-open');
-  document.addEventListener('keydown', onPopupEscKeydown);
+  document.addEventListener('keydown', popupEscKeydownHandler);
   effectLevelSliderElement.classList.toggle('hidden', true);
-  imgUploadPreview.style.filter = 'none';
-  imgUploadPreview.style.transform = `scale(${DEFAULT_SCALE / 100})`;
+  uploadPreviewElement.style.filter = 'none';
+  uploadPreviewElement.style.transform = `scale(${DEFAULT_SCALE / 100})`;
   scaleControlValueElement.value = `${DEFAULT_SCALE}%`;
   closeUploadModal();
   choiceFilterEffect();
@@ -47,7 +47,7 @@ const uploadLabelElementClickHandler = function (evt) {
 //Меняем масштаб превью
 const adjustNewScale = function (newScale) {
   scaleControlValueElement.value = `${newScale}%`;
-  imgUploadPreview.style.transform = `scale(${newScale / 100})`;
+  uploadPreviewElement.style.transform = `scale(${newScale / 100})`;
 };
 
 //Увеличиваем фото
@@ -81,7 +81,7 @@ const closeUploadModal = function () {
 };
 
 const openUploadModal = function () {
-  imgUploadPreview.style.transform = `scale(${parseInt(scaleControlValueElement.value) / 100})`;
+  uploadPreviewElement.style.transform = `scale(${parseInt(scaleControlValueElement.value) / 100})`;
   uploadLabelElement.addEventListener('click', uploadLabelElementClickHandler);
 };
 
