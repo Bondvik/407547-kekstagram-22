@@ -3,6 +3,10 @@ import {ESC_KEY} from './util.js';
 
 const RESIZE_STEP = 25;
 const DEFAULT_SCALE = 50;
+const Scale = {
+  MIN: 25,
+  MAX: 100,
+};
 
 const uploadLabelElement = document.querySelector('.img-upload__label');
 const uploadOverlayElement = document.querySelector('.img-upload__overlay');
@@ -49,7 +53,7 @@ const adjustNewScale = function (newScale) {
 //Увеличиваем фото
 const scaleControlBiggerElementClickHandler = function () {
   let currentImageSize = parseInt(scaleControlValueElement.value);
-  if (currentImageSize < 100) {
+  if (currentImageSize < Scale.MAX) {
     let newImageSize = currentImageSize + RESIZE_STEP;
     adjustNewScale(newImageSize);
   }
@@ -60,7 +64,7 @@ scaleControlBiggerElement.addEventListener('click', scaleControlBiggerElementCli
 //Уменьшаем фото
 const scaleControlSmallerElementClickHandler = function () {
   let currentImageSize = parseInt(scaleControlValueElement.value);
-  if (currentImageSize > 25) {
+  if (currentImageSize > Scale.MIN) {
     let newImageSize = currentImageSize - RESIZE_STEP;
     adjustNewScale(newImageSize);
   }
