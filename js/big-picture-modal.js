@@ -24,7 +24,6 @@ const bigPictureCloseElementHandler = function () {
 }
 
 const pictureListElementClickHandler =  function (evt) {
-  evt.preventDefault();
   if (!evt.target.classList.contains('picture__img')) {
     return;
   }

@@ -63,7 +63,7 @@ scaleControlBiggerElement.addEventListener('click', scaleControlBiggerElementCli
 
 //Уменьшаем фото
 const scaleControlSmallerElementClickHandler = function () {
-  let currentImageSize = parseInt(scaleControlValueElement.value);
+  const currentImageSize = parseInt(scaleControlValueElement.value);
   if (currentImageSize > Scale.MIN) {
     let newImageSize = currentImageSize - RESIZE_STEP;
     adjustNewScale(newImageSize);

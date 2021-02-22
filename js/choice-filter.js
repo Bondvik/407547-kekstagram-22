@@ -34,18 +34,29 @@ window.noUiSlider.create(effectLevelSliderElement, {
 
 effectLevelValueElement.value = 0;
 
+const getCurrentEffect = function () {
+  return document.querySelector('.effects__radio:checked');
+};
+
 effectLevelSliderElement.noUiSlider.on('update', (values, handle) => {
   effectLevelValueElement.value = values[handle];
-  if (uploadPreviewElement.classList.contains(filtersClassName.chrome)) {
-    uploadPreviewElement.style.filter = `grayscale(${effectLevelValueElement.value})`;
-  } else if (uploadPreviewElement.classList.contains(filtersClassName.sepia)) {
-    uploadPreviewElement.style.filter = `sepia(${effectLevelValueElement.value})`;
-  } else if (uploadPreviewElement.classList.contains(filtersClassName.marvin)) {
-    uploadPreviewElement.style.filter = `invert(${effectLevelValueElement.value}%)`;
-  } else if (uploadPreviewElement.classList.contains(filtersClassName.phobos)) {
-    uploadPreviewElement.style.filter = `blur(${effectLevelValueElement.value}px)`;
-  } else if (uploadPreviewElement.classList.contains(filtersClassName.heat)) {
-    uploadPreviewElement.style.filter = `brightness(${effectLevelValueElement.value})`;
+  const effect = getCurrentEffect().value;
+  switch(effect) {
+    case 'chrome':
+      uploadPreviewElement.style.filter = `grayscale(${effectLevelValueElement.value})`;
+      break;
+    case 'sepia':
+      uploadPreviewElement.style.filter = `sepia(${effectLevelValueElement.value})`;
+      break;
+    case 'marvin':
+      uploadPreviewElement.style.filter = `invert(${effectLevelValueElement.value}%)`;
+      break;
+    case 'phobos':
+      uploadPreviewElement.style.filter = `blur(${effectLevelValueElement.value}px)`;
+      break;
+    case 'heat':
+      uploadPreviewElement.style.filter = `brightness(${effectLevelValueElement.value})`;
+      break;
   }
 });
 
@@ -58,20 +69,12 @@ const addEffectsToPhoto = function (radioElement) {
     uploadPreviewElement.classList.add(filtersClassName[radioElement.dataset.effect]);
     effectLevelSliderElement.noUiSlider.updateOptions(effects[radioElement.dataset.effect]);
   }
-  radioElement.value = radioElement.dataset.effect;
 };
 
-const effectsListElementClickHandler = function (evt) {
-  const effectsItemElement = evt.path.find((pathElement) => pathElement.classList.contains('effects__item'));
-  if (!effectsItemElement) {
-    return;
-  }
-  const effectRadioElement = effectsItemElement.querySelector('input');
-  if (!effectRadioElement) {
-    return;
-  }
+const effectsListElementClickHandler = function () {
+  const effect = getCurrentEffect();
   uploadPreviewElement.className = '';
-  addEffectsToPhoto(effectRadioElement);
+  addEffectsToPhoto(effect);
 };
 
 const choiceFilterEffect = function () {
