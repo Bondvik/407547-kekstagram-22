@@ -1,23 +1,36 @@
 import {getPhotosElement} from './data.js';
 import {createComment} from './create-comment.js';
+import {ESC_KEY} from './util.js';
 
 const bigPictureElement = document.querySelector('.big-picture');
 const bodyElement = document.body;
 const bigPictureCloseElement = document.querySelector('.big-picture__cancel');
 
-const bigPictureCloseElementHandler = function () {
+const popupEscKeydownHandler = (evt) => {
+  if (evt.key === ESC_KEY) {
+    evt.preventDefault();
+    closebigPictureModal();
+  }
+};
+
+const closebigPictureModal = () => {
   bigPictureElement.classList.add('hidden');
   bodyElement.classList.remove('modal-open');
+  document.removeEventListener('keydown', popupEscKeydownHandler);
+};
+
+const bigPictureCloseElementHandler = function () {
+  closebigPictureModal();
 }
 
 const pictureListElementClickHandler =  function (evt) {
-  evt.preventDefault();
   if (!evt.target.classList.contains('picture__img')) {
     return;
   }
   bigPictureElement.classList.remove('hidden');
   bodyElement.classList.add('modal-open');
   closeBigPictureModal();
+  document.addEventListener('keydown', popupEscKeydownHandler);
   const bigPictureImageElement = bigPictureElement.querySelector('.big-picture__img img');
   const likes = bigPictureElement.querySelector('.likes-count');
   const comments = bigPictureElement.querySelector('.comments-count');

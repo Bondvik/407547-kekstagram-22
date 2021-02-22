@@ -1,3 +1,4 @@
+const ESC_KEY = 'Escape' || 'Esc';
 const COMMENT_LENGTH = 140;
 const getMaxLengthComment = function (comment) {
   return (comment.length < COMMENT_LENGTH) ? true : false;
@@ -19,4 +20,48 @@ const getRandomNumber = function(min, max) {
   }
   return Math.floor(Math.random() * (maxValue - minValue + 1)) + minValue;
 };
-export {getRandomNumber, getMaxLengthComment};
+
+const effects = {
+  chrome: {
+    range: {
+      min: 0,
+      max: 1,
+    },
+    start: 1,
+    step: 0.1,
+  },
+  sepia: {
+    range: {
+      min: 0,
+      max: 1,
+    },
+    start: 1,
+    step: 0.1,
+  },
+  marvin: {
+    range: {
+      min: 0,
+      max: 100,
+    },
+    start: 100,
+    step: 1,
+  },
+  phobos: {
+    range: {
+      min: 0,
+      max: 3,
+    },
+    start: 3,
+    step: 0.1,
+  },
+  heat: {
+    range: {
+      min: 1,
+      max: 3,
+    },
+    start: 3,
+    step: 0.1,
+  },
+}
+
+export {getRandomNumber, getMaxLengthComment, ESC_KEY, effects};
