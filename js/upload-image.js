@@ -85,4 +85,4 @@ const openUploadModal = function () {
   uploadLabelElement.addEventListener('click', uploadLabelElementClickHandler);
 };
 
-export { openUploadModal };
+export {openUploadModal};

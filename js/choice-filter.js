@@ -35,7 +35,6 @@ window.noUiSlider.create(effectLevelSliderElement, {
 effectLevelValueElement.value = 0;
 
 const getCurrentEffect = function () {
-  // console.dir(document.querySelector('.effects__radio:checked'))
   return document.querySelector('.effects__radio:checked').value;
 };
 
@@ -82,4 +81,4 @@ const choiceFilterEffect = function () {
   effectsListElement.addEventListener('click', effectsListElementClickHandler);
 };
 
-export { choiceFilterEffect };
+export {choiceFilterEffect};
