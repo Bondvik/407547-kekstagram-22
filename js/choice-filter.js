@@ -1,4 +1,4 @@
-import { effects } from './util.js';
+import {effects} from './util.js';
 import './nouislider.js';
 
 const uploadPreviewElement = document.querySelector('.img-upload__preview img');

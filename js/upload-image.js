@@ -1,5 +1,5 @@
-import { choiceFilterEffect } from './choice-filter.js';
-import { ESC_KEY } from './util.js';
+import {choiceFilterEffect} from './choice-filter.js';
+import {ESC_KEY} from './util.js';
 
 const RESIZE_STEP = 25;
 const DEFAULT_SCALE = 50;
