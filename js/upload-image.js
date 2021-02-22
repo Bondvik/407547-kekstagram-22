@@ -1,5 +1,5 @@
-import {choiceFilterEffect} from './choice-filter.js';
-import {ESC_KEY} from './util.js';
+import { choiceFilterEffect } from './choice-filter.js';
+import { ESC_KEY } from './util.js';
 
 const RESIZE_STEP = 25;
 const DEFAULT_SCALE = 50;
@@ -51,7 +51,7 @@ const adjustNewScale = function (newScale) {
 };
 
 //Увеличиваем фото
-const scaleControlBiggerElementClickHandler = function () {
+const scaleControlBiggerClickHandler = function () {
   let currentImageSize = parseInt(scaleControlValueElement.value);
   if (currentImageSize < Scale.MAX) {
     let newImageSize = currentImageSize + RESIZE_STEP;
@@ -59,10 +59,10 @@ const scaleControlBiggerElementClickHandler = function () {
   }
 };
 
-scaleControlBiggerElement.addEventListener('click', scaleControlBiggerElementClickHandler);
+scaleControlBiggerElement.addEventListener('click', scaleControlBiggerClickHandler);
 
 //Уменьшаем фото
-const scaleControlSmallerElementClickHandler = function () {
+const scaleControlSmallerClickHandler = function () {
   const currentImageSize = parseInt(scaleControlValueElement.value);
   if (currentImageSize > Scale.MIN) {
     let newImageSize = currentImageSize - RESIZE_STEP;
@@ -70,7 +70,7 @@ const scaleControlSmallerElementClickHandler = function () {
   }
 };
 
-scaleControlSmallerElement.addEventListener('click', scaleControlSmallerElementClickHandler);
+scaleControlSmallerElement.addEventListener('click', scaleControlSmallerClickHandler);
 
 const uploadCancelElementClickHandler = function () {
   closeImgModal();
@@ -85,4 +85,4 @@ const openUploadModal = function () {
   uploadLabelElement.addEventListener('click', uploadLabelElementClickHandler);
 };
 
-export {openUploadModal};
+export { openUploadModal };
