@@ -2,7 +2,7 @@ import {choiceFilterEffect} from './choice-filter.js';
 import {ESC_KEY} from './util.js';
 
 const RESIZE_STEP = 25;
-const DEFAULT_SCALE = 50;
+const DEFAULT_SCALE = 100;
 const Scale = {
   MIN: 25,
   MAX: 100,
