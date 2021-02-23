@@ -52,6 +52,8 @@ const uploadLabelElementClickHandler = function (evt) {
   scaleControlValueElement.value = `${DEFAULT_SCALE}%`;
   closeUploadModal();
   choiceFilterEffect();
+  getHashtagsValidation();
+  getDescriptionValidation()
   uploadSubmitElement();
 };
 
