@@ -8,11 +8,13 @@ const descriptionElementInputHandler = function () {
   charCounter.textContent = descriptionElement.value.length;
   if (descriptionElement.value.length > DESCRIPTION_LENGTH) {
     descriptionElement.classList.add('warning');
+    return false;
   }
+  return true;
 };
 
 const getDescriptionValidation = function () {
   descriptionElement.addEventListener('input', descriptionElementInputHandler);
 };
 
-export {getDescriptionValidation};
+export {getDescriptionValidation, descriptionElementInputHandler};

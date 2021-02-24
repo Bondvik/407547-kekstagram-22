@@ -1,7 +1,7 @@
 import {choiceFilterEffect} from './choice-filter.js';
 import {ESC_KEY} from './util.js';
-import {getHashtagsValidation} from './validation-hashtag.js';
-import {getDescriptionValidation} from './validation-description.js';
+import {getHashtagsValidation, hashtagsElementInputHandler} from './validation-hashtag.js';
+import {getDescriptionValidation, descriptionElementInputHandler} from './validation-description.js';
 
 const RESIZE_STEP = 25;
 const DEFAULT_SCALE = 100;
@@ -57,9 +57,10 @@ const uploadLabelElementClickHandler = function (evt) {
   uploadSubmitElement();
 };
 
-const uploadSubmitElementHandler = function () {
-  if (!getHashtagsValidation() && !getDescriptionValidation()) {
-    return;
+const uploadSubmitElementHandler = function (evt) {
+  evt.preventDefault();
+  if (hashtagsElementInputHandler() && descriptionElementInputHandler()) {
+    //console.log('SEND');
   }
 }
 
