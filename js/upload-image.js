@@ -1,8 +1,9 @@
 import {choiceFilterEffect} from './choice-filter.js';
 import {ESC_KEY} from './util.js';
+import './validation.js';
 
 const RESIZE_STEP = 25;
-const DEFAULT_SCALE = 50;
+const DEFAULT_SCALE = 100;
 const Scale = {
   MIN: 25,
   MAX: 100,
@@ -16,6 +17,7 @@ const scaleControlSmallerElement = document.querySelector('.scale__control--smal
 const scaleControlValueElement = document.querySelector('.scale__control--value');
 const uploadPreviewElement = document.querySelector('.img-upload__preview img');
 const effectLevelSliderElement = document.querySelector('.effect-level__slider');
+const uploadSelectElement = document.querySelector('#upload-select-image');
 const bodyElement = document.body;
 
 const popupEscKeydownHandler = (evt) => {
@@ -26,6 +28,13 @@ const popupEscKeydownHandler = (evt) => {
 };
 
 const closeImgModal = () => {
+  const currentActiveElement = document.activeElement;
+  if (currentActiveElement.classList.contains('text__description')) {
+    return;
+  }
+  if (currentActiveElement.classList.contains('text__hashtags')) {
+    return;
+  }
   uploadOverlayElement.classList.add('hidden');
   bodyElement.classList.remove('modal-open');
   document.removeEventListener('keydown', popupEscKeydownHandler);
@@ -43,6 +52,10 @@ const uploadLabelElementClickHandler = function (evt) {
   closeUploadModal();
   choiceFilterEffect();
 };
+
+const uploadSubmitElementHandler = function (evt) {
+  evt.preventDefault();
+}
 
 //Меняем масштаб превью
 const adjustNewScale = function (newScale) {
@@ -84,5 +97,7 @@ const openUploadModal = function () {
   uploadPreviewElement.style.transform = `scale(${parseInt(scaleControlValueElement.value) / 100})`;
   uploadLabelElement.addEventListener('click', uploadLabelElementClickHandler);
 };
+
+uploadSelectElement.addEventListener('submit', uploadSubmitElementHandler);
 
 export {openUploadModal};
