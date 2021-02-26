@@ -1,7 +1,6 @@
 import {choiceFilterEffect} from './choice-filter.js';
 import {ESC_KEY} from './util.js';
-import {getHashtagsValidation, hashtagsElementInputHandler} from './validation-hashtag.js';
-import {getDescriptionValidation, descriptionElementInputHandler} from './validation-description.js';
+import './validation.js';
 
 const RESIZE_STEP = 25;
 const DEFAULT_SCALE = 100;
@@ -52,20 +51,10 @@ const uploadLabelElementClickHandler = function (evt) {
   scaleControlValueElement.value = `${DEFAULT_SCALE}%`;
   closeUploadModal();
   choiceFilterEffect();
-  getHashtagsValidation();
-  getDescriptionValidation()
-  uploadSubmitElement();
 };
 
 const uploadSubmitElementHandler = function (evt) {
   evt.preventDefault();
-  if (hashtagsElementInputHandler() && descriptionElementInputHandler()) {
-    //console.log('SEND');
-  }
-}
-
-const uploadSubmitElement = function () {
-  uploadSelectElement.addEventListener('submit', uploadSubmitElementHandler);
 }
 
 //Меняем масштаб превью
@@ -108,5 +97,7 @@ const openUploadModal = function () {
   uploadPreviewElement.style.transform = `scale(${parseInt(scaleControlValueElement.value) / 100})`;
   uploadLabelElement.addEventListener('click', uploadLabelElementClickHandler);
 };
+
+uploadSelectElement.addEventListener('submit', uploadSubmitElementHandler);
 
 export {openUploadModal};
