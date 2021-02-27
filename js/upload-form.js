@@ -3,6 +3,7 @@ import {ESC_KEY} from './util.js';
 import './validation.js';
 
 const RESIZE_STEP = 25;
+const DEFAULT_CHAR_COUNTER = 0;
 const DEFAULT_SCALE = 100;
 const Scale = {
   MIN: 25,
@@ -37,7 +38,7 @@ const closeImgModal = () => {
     return;
   }
   document.querySelector('#upload-select-image').reset();
-  charCounter.textContent = 0;
+  charCounter.textContent = DEFAULT_CHAR_COUNTER;
   uploadOverlayElement.classList.add('hidden');
   bodyElement.classList.remove('modal-open');
   document.removeEventListener('keydown', popupEscKeydownHandler);
