@@ -5,7 +5,6 @@ const hashtagsElement = document.querySelector('.text__hashtags');
 const descriptionElement = document.querySelector('.text__description');
 const charCounter = document.querySelector('.char-counter');
 
-
 const getResultOfHashtagMatching = (tag) => {
   const regex = new RegExp(/^#[a-zA-Zа-яА-Я\d]{1,19}$/);
   return regex.test(tag);
@@ -53,7 +52,6 @@ const descriptionElementInputHandler = function () {
     descriptionElement.classList.add('warning');
     return false;
   }
-  return true;
 };
 
 hashtagsElement.addEventListener('input', hashtagsElementInputHandler);
