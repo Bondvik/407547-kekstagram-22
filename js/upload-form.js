@@ -1,4 +1,4 @@
-import {choiceEffect} from './photo-effects.js';
+import {choiceEffect} from './picture-effects.js';
 import {ESC_KEY} from './util.js';
 import './validation.js';
 
