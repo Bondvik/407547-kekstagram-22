@@ -6,7 +6,7 @@ const effectsListElement = document.querySelector('.effects__list');
 const effectLevelSliderElement = document.querySelector('.effect-level__slider');
 const effectLevelValueElement = document.querySelector('.effect-level__value');
 
-const filtersClassName = {
+const effectsClassName = {
   chrome: 'effects__preview--chrome',
   sepia: 'effects__preview--sepia',
   marvin: 'effects__preview--marvin',
@@ -67,7 +67,7 @@ const addEffectsToPhoto = function () {
     uploadPreviewElement.style.filter = effect;
   } else {
     effectLevelSliderElement.classList.toggle('hidden', false);
-    uploadPreviewElement.classList.add(filtersClassName[effect]);
+    uploadPreviewElement.classList.add(effectsClassName[effect]);
     effectLevelSliderElement.noUiSlider.updateOptions(effects[effect]);
   }
 };
@@ -77,8 +77,8 @@ const effectsListElementClickHandler = function () {
   addEffectsToPhoto();
 };
 
-const choiceFilterEffect = function () {
+const choiceEffect = function () {
   effectsListElement.addEventListener('click', effectsListElementClickHandler);
 };
 
-export {choiceFilterEffect};
+export {choiceEffect};

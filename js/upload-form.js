@@ -1,4 +1,4 @@
-import {choiceFilterEffect} from './choice-filter.js';
+import {choiceEffect} from './photo-effects.js';
 import {ESC_KEY} from './util.js';
 import './validation.js';
 
@@ -18,6 +18,7 @@ const scaleControlValueElement = document.querySelector('.scale__control--value'
 const uploadPreviewElement = document.querySelector('.img-upload__preview img');
 const effectLevelSliderElement = document.querySelector('.effect-level__slider');
 const uploadSelectElement = document.querySelector('#upload-select-image');
+const charCounter = document.querySelector('.char-counter');
 const bodyElement = document.body;
 
 const popupEscKeydownHandler = (evt) => {
@@ -35,6 +36,8 @@ const closeImgModal = () => {
   if (currentActiveElement.classList.contains('text__hashtags')) {
     return;
   }
+  document.querySelector('#upload-select-image').reset();
+  charCounter.textContent = 0;
   uploadOverlayElement.classList.add('hidden');
   bodyElement.classList.remove('modal-open');
   document.removeEventListener('keydown', popupEscKeydownHandler);
@@ -50,7 +53,7 @@ const uploadLabelElementClickHandler = function (evt) {
   uploadPreviewElement.style.transform = `scale(${DEFAULT_SCALE / 100})`;
   scaleControlValueElement.value = `${DEFAULT_SCALE}%`;
   closeUploadModal();
-  choiceFilterEffect();
+  choiceEffect();
 };
 
 const uploadSubmitElementHandler = function (evt) {
