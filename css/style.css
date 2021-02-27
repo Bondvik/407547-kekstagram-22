@@ -1416,3 +1416,19 @@ main {
 .hidden {
   display: none;
 }
+
+.error-input-field {
+  border: 1px solid #f05b29;
+}
+
+.text-counter {
+  display: inline-block;
+  vertical-align: baseline;
+  padding: 7px 0;
+  margin-right: auto;
+}
+
+.warning {
+  color: #f05b29;
+  border-color: #f05b29;
+}
