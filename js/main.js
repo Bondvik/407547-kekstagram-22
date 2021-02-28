@@ -1,6 +1,8 @@
-import {getPublicPhotos} from './data.js';
+import {getData} from './api.js';
+import {showAlert} from './util.js';
 import {createPicture} from './create-picture.js';
-import {openUploadModal} from './upload-form.js';
+import './upload-form.js';
 
-createPicture(getPublicPhotos());
-openUploadModal();
+getData((pictures) => {
+  createPicture(pictures);
+}, showAlert);

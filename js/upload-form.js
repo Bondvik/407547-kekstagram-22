@@ -1,5 +1,8 @@
 import {choiceEffect} from './picture-effects.js';
 import {ESC_KEY} from './util.js';
+import {sendData} from './api.js';
+import {showPopup} from './popup.js';
+import {showPopupError} from './popup-error.js';
 import './validation.js';
 
 const RESIZE_STEP = 25;
@@ -10,7 +13,6 @@ const Scale = {
   MAX: 100,
 };
 
-const uploadLabelElement = document.querySelector('.img-upload__label');
 const uploadOverlayElement = document.querySelector('.img-upload__overlay');
 const uploadCancelElement = document.querySelector('.img-upload__cancel');
 const scaleControlBiggerElement = document.querySelector('.scale__control--bigger');
@@ -21,6 +23,20 @@ const effectLevelSliderElement = document.querySelector('.effect-level__slider')
 const uploadSelectElement = document.querySelector('#upload-select-image');
 const charCounter = document.querySelector('.char-counter');
 const bodyElement = document.body;
+const fileChooser = document.querySelector('#upload-file');
+
+const uploadFormHandler = function () {
+  uploadPreviewElement.style.transform = `scale(${parseInt(scaleControlValueElement.value) / 100})`;
+  uploadOverlayElement.classList.remove('hidden');
+  bodyElement.classList.add('modal-open');
+  document.addEventListener('keydown', popupEscKeydownHandler);
+  effectLevelSliderElement.classList.toggle('hidden', true);
+  uploadPreviewElement.style.filter = 'none';
+  uploadPreviewElement.style.transform = `scale(${DEFAULT_SCALE / 100})`;
+  scaleControlValueElement.value = `${DEFAULT_SCALE}%`;
+  closeUploadModal();
+  choiceEffect();
+}
 
 const popupEscKeydownHandler = (evt) => {
   if (evt.key === ESC_KEY) {
@@ -37,6 +53,7 @@ const closeUploadSelect = () => {
   if (currentActiveElement.classList.contains('text__hashtags')) {
     return;
   }
+  fileChooser.value = '';
   document.querySelector('#upload-select-image').reset();
   charCounter.textContent = DEFAULT_CHAR_COUNTER;
   uploadOverlayElement.classList.add('hidden');
@@ -44,21 +61,10 @@ const closeUploadSelect = () => {
   document.removeEventListener('keydown', popupEscKeydownHandler);
 };
 
-const uploadLabelElementClickHandler = function (evt) {
-  evt.preventDefault();
-  uploadOverlayElement.classList.remove('hidden');
-  bodyElement.classList.add('modal-open');
-  document.addEventListener('keydown', popupEscKeydownHandler);
-  effectLevelSliderElement.classList.toggle('hidden', true);
-  uploadPreviewElement.style.filter = 'none';
-  uploadPreviewElement.style.transform = `scale(${DEFAULT_SCALE / 100})`;
-  scaleControlValueElement.value = `${DEFAULT_SCALE}%`;
-  closeUploadModal();
-  choiceEffect();
-};
-
 const uploadSubmitElementHandler = function (evt) {
   evt.preventDefault();
+  sendData(showPopup, showPopupError, new FormData(evt.target));
+  closeUploadSelect();
 }
 
 //Меняем масштаб превью
@@ -97,11 +103,5 @@ const closeUploadModal = function () {
   uploadCancelElement.addEventListener('click', uploadCancelElementClickHandler);
 };
 
-const openUploadModal = function () {
-  uploadPreviewElement.style.transform = `scale(${parseInt(scaleControlValueElement.value) / 100})`;
-  uploadLabelElement.addEventListener('click', uploadLabelElementClickHandler);
-};
-
 uploadSelectElement.addEventListener('submit', uploadSubmitElementHandler);
-
-export {openUploadModal};
+fileChooser.addEventListener('change', uploadFormHandler);
