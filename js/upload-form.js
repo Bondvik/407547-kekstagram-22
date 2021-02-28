@@ -25,11 +25,11 @@ const bodyElement = document.body;
 const popupEscKeydownHandler = (evt) => {
   if (evt.key === ESC_KEY) {
     evt.preventDefault();
-    closeImgModal();
+    closeUploadSelect();
   }
 };
 
-const closeImgModal = () => {
+const closeUploadSelect = () => {
   const currentActiveElement = document.activeElement;
   if (currentActiveElement.classList.contains('text__description')) {
     return;
@@ -90,7 +90,7 @@ const scaleControlSmallerClickHandler = function () {
 scaleControlSmallerElement.addEventListener('click', scaleControlSmallerClickHandler);
 
 const uploadCancelElementClickHandler = function () {
-  closeImgModal();
+  closeUploadSelect();
 };
 
 const closeUploadModal = function () {
