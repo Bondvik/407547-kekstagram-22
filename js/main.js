@@ -3,6 +3,4 @@ import {showAlert} from './util.js';
 import {createPicture} from './create-picture.js';
 import './upload-form.js';
 
-getData((pictures) => {
-  createPicture(pictures);
-}, showAlert);
+getData((pictures) => createPicture(pictures), showAlert);

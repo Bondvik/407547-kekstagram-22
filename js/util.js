@@ -1,6 +1,6 @@
 const ESC_KEY = 'Escape' || 'Esc';
 const COMMENT_LENGTH = 140;
-const ALERT_SHOW_TIME = 5000;
+const ALERT_DELAY_TIME = 5000;
 const getMaxLengthComment = (comment) => comment.length < COMMENT_LENGTH;
 
 //Источник: https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Math/random
@@ -65,23 +65,12 @@ const effects = {
 
 const showAlert = (message) => {
   const alertContainer = document.createElement('div');
-  alertContainer.style.zIndex = 100;
-  alertContainer.style.position = 'absolute';
-  alertContainer.style.left = 0;
-  alertContainer.style.top = 0;
-  alertContainer.style.right = 0;
-  alertContainer.style.padding = '10px 3px';
-  alertContainer.style.fontSize = '30px';
-  alertContainer.style.textAlign = 'center';
-  alertContainer.style.backgroundColor = 'red';
-
+  alertContainer.classList.add('alert-error');
   alertContainer.textContent = message;
-
   document.body.append(alertContainer);
-
   setTimeout(() => {
     alertContainer.remove();
-  }, ALERT_SHOW_TIME);
+  }, ALERT_DELAY_TIME);
 }
 
 export {getRandomNumber, getMaxLengthComment, ESC_KEY, effects, showAlert};

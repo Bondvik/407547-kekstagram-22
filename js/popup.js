@@ -8,11 +8,15 @@ const successCloseElement = successElement.querySelector('.success__button');
 const popupEscKeydownHandler = (evt) => {
   if (evt.key === ESC_KEY) {
     evt.preventDefault();
-    successCloseClickHandler();
+    closePopup();
   }
 };
 
 const successCloseClickHandler = function () {
+  closePopup();
+};
+
+const closePopup = function () {
   successElement.remove();
   successCloseElement.removeEventListener('click', successCloseClickHandler);
   document.removeEventListener('keydown', popupEscKeydownHandler);

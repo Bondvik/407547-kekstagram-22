@@ -1,7 +1,9 @@
+const API_HTTP = 'https://22.javascript.pages.academy/kekstagram';
+
 let thumbnails = null;
 
 const getData = (onSuccess, onFail) => {
-  fetch('https://22.javascript.pages.academy/kekstagram/data', {
+  fetch(`${API_HTTP}/data`, {
     method: 'GET',
     credentials: 'same-origin',
   })
@@ -20,14 +22,11 @@ const getData = (onSuccess, onFail) => {
 };
 
 const sendData = (onSuccess, onFail, body) => {
-  fetch(
-    'https://22.javascript.pages.academy/kekstagram',
-    {
-      method: 'POST',
-      credentials: 'same-origin',
-      body: body,
-    },
-  )
+  fetch(API_HTTP, {
+    method: 'POST',
+    credentials: 'same-origin',
+    body: body,
+  })
     .then((response) => {
       if (response.ok) {
         onSuccess();

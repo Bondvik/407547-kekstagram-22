@@ -8,11 +8,15 @@ const errorCloseElement = errorElement.querySelector('.error__button');
 const popupEscKeydownHandler = (evt) => {
   if (evt.key === ESC_KEY) {
     evt.preventDefault();
-    errorCloseClickHandler();
+    closePopupError();
   }
 };
 
 const errorCloseClickHandler = function () {
+  closePopupError();
+};
+
+const closePopupError = function () {
   errorElement.remove();
   errorCloseElement.removeEventListener('click', errorCloseClickHandler);
   document.removeEventListener('keydown', popupEscKeydownHandler);
