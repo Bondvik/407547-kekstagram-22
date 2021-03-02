@@ -61,7 +61,7 @@ const closeUploadSelect = () => {
   document.removeEventListener('keydown', popupEscKeydownHandler);
 };
 
-const uploadSubmitElementHandler = function (evt) {
+const uploadSubmitHandler = function (evt) {
   evt.preventDefault();
   sendData(showPopup, showPopupError, new FormData(evt.target));
   closeUploadSelect();
@@ -95,13 +95,13 @@ const scaleControlSmallerClickHandler = function () {
 
 scaleControlSmallerElement.addEventListener('click', scaleControlSmallerClickHandler);
 
-const uploadCancelElementClickHandler = function () {
+const uploadCancelClickHandler = function () {
   closeUploadSelect();
 };
 
 const closeUploadModal = function () {
-  uploadCancelElement.addEventListener('click', uploadCancelElementClickHandler);
+  uploadCancelElement.addEventListener('click', uploadCancelClickHandler);
 };
 
-uploadSelectElement.addEventListener('submit', uploadSubmitElementHandler);
+uploadSelectElement.addEventListener('submit', uploadSubmitHandler);
 fileChooser.addEventListener('change', uploadFormHandler);

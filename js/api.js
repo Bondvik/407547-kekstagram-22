@@ -9,7 +9,7 @@ const getData = (onSuccess, onFail) => {
   })
     .then((response) => {
       if (response.ok) {
-        return response.json()
+        return response.json();
       }
     })
     .then((pictures) => {
