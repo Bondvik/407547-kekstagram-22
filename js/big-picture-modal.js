@@ -1,4 +1,4 @@
-import {getPhotosElement} from './data.js';
+import {getPhotosElement} from './api.js';
 import {createComment} from './create-comment.js';
 import {ESC_KEY} from './util.js';
 

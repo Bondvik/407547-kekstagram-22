@@ -6,7 +6,7 @@ const effectsListElement = document.querySelector('.effects__list');
 const effectLevelSliderElement = document.querySelector('.effect-level__slider');
 const effectLevelValueElement = document.querySelector('.effect-level__value');
 
-const filtersClassName = {
+const effectsClassName = {
   chrome: 'effects__preview--chrome',
   sepia: 'effects__preview--sepia',
   marvin: 'effects__preview--marvin',
@@ -35,13 +35,13 @@ window.noUiSlider.create(effectLevelSliderElement, {
 effectLevelValueElement.value = 0;
 
 const getCurrentEffect = function () {
-  return document.querySelector('.effects__radio:checked');
+  return document.querySelector('.effects__radio:checked').value;
 };
 
 effectLevelSliderElement.noUiSlider.on('update', (values, handle) => {
   effectLevelValueElement.value = values[handle];
-  const effect = getCurrentEffect().value;
-  switch(effect) {
+  const effect = getCurrentEffect();
+  switch (effect) {
     case 'chrome':
       uploadPreviewElement.style.filter = `grayscale(${effectLevelValueElement.value})`;
       break;
@@ -60,25 +60,25 @@ effectLevelSliderElement.noUiSlider.on('update', (values, handle) => {
   }
 });
 
-const addEffectsToPhoto = function (radioElement) {
-  if (radioElement.dataset.effect === 'none') {
+const addEffectsToPhoto = function () {
+  const effect = getCurrentEffect();
+  if (effect === 'none') {
     effectLevelSliderElement.classList.toggle('hidden', true);
-    uploadPreviewElement.style.filter = radioElement.dataset.effect;
+    uploadPreviewElement.style.filter = effect;
   } else {
     effectLevelSliderElement.classList.toggle('hidden', false);
-    uploadPreviewElement.classList.add(filtersClassName[radioElement.dataset.effect]);
-    effectLevelSliderElement.noUiSlider.updateOptions(effects[radioElement.dataset.effect]);
+    uploadPreviewElement.classList.add(effectsClassName[effect]);
+    effectLevelSliderElement.noUiSlider.updateOptions(effects[effect]);
   }
 };
 
 const effectsListElementClickHandler = function () {
-  const effect = getCurrentEffect();
   uploadPreviewElement.className = '';
-  addEffectsToPhoto(effect);
+  addEffectsToPhoto();
 };
 
-const choiceFilterEffect = function () {
+const choiceEffect = function () {
   effectsListElement.addEventListener('click', effectsListElementClickHandler);
 };
 
-export {choiceFilterEffect};
+export {choiceEffect};
