@@ -1,4 +1,4 @@
-import {choiceEffect} from './picture-effects.js';
+import {choiceEffect} from './choise-effect.js';
 import {ESC_KEY} from './util.js';
 import {sendData} from './api.js';
 import {showPopup} from './popup.js';

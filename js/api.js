@@ -9,7 +9,7 @@ const getData = (onSuccess, onFail) => {
   })
     .then((response) => {
       if (response.ok) {
-        return response.json();
+        return response.json()
       }
     })
     .then((pictures) => {
@@ -41,6 +41,10 @@ const sendData = (onSuccess, onFail, body) => {
 
 const getPhotosElement = function (id) {
   return thumbnails[id];
+};
+
+const getAllPhotos = function () {
+  return thumbnails;
 }
 
-export {getData, sendData, getPhotosElement};
+export {getData, sendData, getPhotosElement, getAllPhotos};
