@@ -3,6 +3,7 @@ import {getRandomNumber, throttle} from './util.js';
 import {createPicture} from './create-picture.js';
 
 const RERENDER_DELAY = 500;
+const RANDOM_PICTURE_COUNT = 10;
 
 const filtersElement = document.querySelector('.img-filters');
 const filtersFormElement = filtersElement.querySelector('.img-filters__form');
@@ -22,6 +23,7 @@ const getShufflePictures = function (pictures) {
     let picture = dataPictures.splice(random, 1)[0];
     shufflePictures.push(picture);
   }
+  shufflePictures.length = RANDOM_PICTURE_COUNT;
   return shufflePictures;
 };
 
