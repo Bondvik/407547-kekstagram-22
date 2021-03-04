@@ -2,7 +2,7 @@ import {getAllPhotos} from './api.js';
 import {getRandomNumber, throttle} from './util.js';
 import {createPicture} from './create-picture.js';
 
-const RENDER_DELAY = 2000;
+const RENDER_DELAY = 500;
 const RANDOM_PICTURE_COUNT = 10;
 
 const filtersElement = document.querySelector('.img-filters');
