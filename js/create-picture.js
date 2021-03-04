@@ -7,9 +7,9 @@ const createPicture = function (pictures) {
 
   pictures.forEach((picture) => {
     const pictureElement = pictureTemplate.cloneNode(true);
-    const pictureImageElement = pictureElement.querySelector('.picture__img');
-    pictureImageElement.src = picture.url;
-    pictureImageElement.dataset.imgId = picture.id;
+    const imageElement = pictureElement.querySelector('.picture__img');
+    imageElement.src = picture.url;
+    imageElement.dataset.imgId = picture.id;
     pictureElement.querySelector('.picture__likes').textContent = picture.likes;
     pictureElement.querySelector('.picture__comments').textContent = picture.comments.length;
     pictureListFragment.appendChild(pictureElement);
