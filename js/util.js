@@ -74,13 +74,11 @@ const showAlert = (message) => {
 };
 
 //Источник: https://codeburst.io/throttling-and-debouncing-in-javascript-b01cad5c8edf
-const throttle = function (func, limit) {
+const throttle = function (cb, limit) {
   let inThrottle;
   return function() {
-    const args = arguments;
-    const context = this;
     if (!inThrottle) {
-      func.apply(context, args);
+      cb.apply(this, arguments);
       inThrottle = true;
       setTimeout(() => inThrottle = false, limit);
     }
