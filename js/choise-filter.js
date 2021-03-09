@@ -1,5 +1,5 @@
 import {getAllPhotos} from './api.js';
-import {getRandomNumber, throttle} from './util.js';
+import {getRandomNumber, debounce} from './util.js';
 import {createPicture} from './create-picture.js';
 
 const RENDER_DELAY = 500;
@@ -35,7 +35,7 @@ const clearPictureList = function () {
   })
 };
 
-const setFiltersClick = throttle(function (evt) {
+const setFiltersClick = debounce(function (evt) {
   clearPictureList();
   evt.target.classList.add('img-filters__button--active');
   switch (evt.target.id) {
