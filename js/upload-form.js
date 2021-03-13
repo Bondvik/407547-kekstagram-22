@@ -5,6 +5,7 @@ import {showPopup} from './popup.js';
 import {showPopupError} from './popup-error.js';
 import './validation.js';
 
+const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 const RESIZE_STEP = 25;
 const DEFAULT_CHAR_COUNTER = 0;
 const DEFAULT_SCALE = 100;
@@ -26,6 +27,18 @@ const bodyElement = document.body;
 const fileChooser = document.querySelector('#upload-file');
 
 const uploadFormHandler = function () {
+  const file = fileChooser.files[0];
+  const fileName = file.name.toLowerCase();
+  const matches = FILE_TYPES.some((extension) => {
+    return fileName.endsWith(extension);
+  });
+  if (matches) {
+    const reader = new FileReader();
+    reader.addEventListener('load', () => {
+      uploadPreviewElement.src = reader.result;
+    });
+    reader.readAsDataURL(file);
+  }
   uploadPreviewElement.style.transform = `scale(${parseInt(scaleControlValueElement.value) / 100})`;
   uploadOverlayElement.classList.remove('hidden');
   bodyElement.classList.add('modal-open');
