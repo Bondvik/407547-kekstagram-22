@@ -24,14 +24,12 @@ const effectLevelSliderElement = document.querySelector('.effect-level__slider')
 const uploadSelectElement = document.querySelector('#upload-select-image');
 const charCounter = document.querySelector('.char-counter');
 const bodyElement = document.body;
-const fileChooser = document.querySelector('#upload-file');
+const uploaderElement = document.querySelector('#upload-file');
 
 const uploadFormHandler = function () {
-  const file = fileChooser.files[0];
+  const file = uploaderElement.files[0];
   const fileName = file.name.toLowerCase();
-  const matches = FILE_TYPES.some((extension) => {
-    return fileName.endsWith(extension);
-  });
+  const matches = FILE_TYPES.some((extension) => fileName.endsWith(extension));
   if (matches) {
     const reader = new FileReader();
     reader.addEventListener('load', () => {
@@ -66,7 +64,7 @@ const closeUploadSelect = () => {
   if (currentActiveElement.classList.contains('text__hashtags')) {
     return;
   }
-  fileChooser.value = '';
+  uploaderElement.value = '';
   document.querySelector('#upload-select-image').reset();
   charCounter.textContent = DEFAULT_CHAR_COUNTER;
   uploadOverlayElement.classList.add('hidden');
@@ -117,4 +115,4 @@ const closeUploadModal = function () {
 };
 
 uploadSelectElement.addEventListener('submit', uploadSubmitHandler);
-fileChooser.addEventListener('change', uploadFormHandler);
+uploaderElement.addEventListener('change', uploadFormHandler);
