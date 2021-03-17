@@ -5,6 +5,7 @@ const uploadPreviewElement = document.querySelector('.img-upload__preview img');
 const effectsListElement = document.querySelector('.effects__list');
 const effectLevelSliderElement = document.querySelector('.effect-level__slider');
 const effectLevelValueElement = document.querySelector('.effect-level__value');
+const effectLevelElement = document.querySelector('.effect-level');
 
 const effectsClassName = {
   chrome: 'effects__preview--chrome',
@@ -63,9 +64,11 @@ effectLevelSliderElement.noUiSlider.on('update', (values, handle) => {
 const addEffectsToPhoto = function () {
   const effect = getCurrentEffect();
   if (effect === 'none') {
+    effectLevelElement.style.display = 'none';
     effectLevelSliderElement.classList.toggle('hidden', true);
     uploadPreviewElement.style.filter = effect;
   } else {
+    effectLevelElement.style.display = 'block';
     effectLevelSliderElement.classList.toggle('hidden', false);
     uploadPreviewElement.classList.add(effectsClassName[effect]);
     effectLevelSliderElement.noUiSlider.updateOptions(effects[effect]);

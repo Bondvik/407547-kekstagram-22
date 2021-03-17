@@ -35,10 +35,8 @@ const clearPictureList = function () {
   })
 };
 
-const setFiltersClick = debounce(function (evt) {
-  clearPictureList();
-  evt.target.classList.add('img-filters__button--active');
-  switch (evt.target.id) {
+const setFilters = debounce(function (choiseFilter) {
+  switch (choiseFilter) {
     case 'filter-default':
       createPicture(getAllPhotos());
       break;
@@ -52,7 +50,9 @@ const setFiltersClick = debounce(function (evt) {
 }, RENDER_DELAY);
 
 const filtersFormHandler = function (evt) {
-  setFiltersClick(evt);
+  clearPictureList();
+  evt.target.classList.add('img-filters__button--active');
+  setFilters(evt.target.id);
 };
 
 const choiceFilter = function () {

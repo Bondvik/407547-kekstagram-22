@@ -1,5 +1,4 @@
 import {getPhotosElement} from './api.js';
-import {createComment} from './create-comment.js';
 import {ESC_KEY} from './util.js';
 
 const LOADED_COMMENTS = 5;
@@ -26,6 +25,29 @@ const closebigPictureModal = () => {
 
 const bigPictureCloseElementHandler = function () {
   closebigPictureModal();
+};
+
+const createMessage = function (element) {
+  const textElement = document.createElement('p');
+  textElement.classList.add('social__text');
+  textElement.textContent = element.message;
+  return textElement;
+};
+
+const createAvatar = function (element) {
+  const imageElement = document.createElement('img');
+  imageElement.classList.add('social__picture');
+  imageElement.src = element.avatar;
+  imageElement.alt = element.name;
+  return imageElement;
+};
+
+const createComment = function (element) {
+  const itemElement = document.createElement('li');
+  itemElement.classList.add('social__comment');
+  itemElement.appendChild(createAvatar(element));
+  itemElement.appendChild(createMessage(element));
+  return itemElement;
 };
 
 const createLoadedComment = function (element) {

@@ -1,8 +1,7 @@
 import {choiceEffect} from './choise-effect.js';
 import {ESC_KEY} from './util.js';
 import {sendData} from './api.js';
-import {showPopup} from './popup.js';
-import {showPopupError} from './popup-error.js';
+import {showPopup, showPopupError} from './popup.js';
 import './validation.js';
 
 const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
@@ -23,6 +22,7 @@ const uploadPreviewElement = document.querySelector('.img-upload__preview img');
 const effectLevelSliderElement = document.querySelector('.effect-level__slider');
 const uploadSelectElement = document.querySelector('#upload-select-image');
 const charCounter = document.querySelector('.char-counter');
+const effectLevelElement = document.querySelector('.effect-level');
 const bodyElement = document.body;
 const uploaderElement = document.querySelector('#upload-file');
 
@@ -42,6 +42,7 @@ const uploadFormHandler = function () {
   bodyElement.classList.add('modal-open');
   document.addEventListener('keydown', popupEscKeydownHandler);
   effectLevelSliderElement.classList.toggle('hidden', true);
+  effectLevelElement.style.display = 'none';
   uploadPreviewElement.style.filter = 'none';
   uploadPreviewElement.style.transform = `scale(${DEFAULT_SCALE / 100})`;
   scaleControlValueElement.value = `${DEFAULT_SCALE}%`;
@@ -86,9 +87,9 @@ const adjustNewScale = function (newScale) {
 
 //Увеличиваем фото
 const scaleControlBiggerClickHandler = function () {
-  let currentImageSize = parseInt(scaleControlValueElement.value);
+  const currentImageSize = parseInt(scaleControlValueElement.value);
   if (currentImageSize < Scale.MAX) {
-    let newImageSize = currentImageSize + RESIZE_STEP;
+    const newImageSize = currentImageSize + RESIZE_STEP;
     adjustNewScale(newImageSize);
   }
 };
@@ -99,7 +100,7 @@ scaleControlBiggerElement.addEventListener('click', scaleControlBiggerClickHandl
 const scaleControlSmallerClickHandler = function () {
   const currentImageSize = parseInt(scaleControlValueElement.value);
   if (currentImageSize > Scale.MIN) {
-    let newImageSize = currentImageSize - RESIZE_STEP;
+    const newImageSize = currentImageSize - RESIZE_STEP;
     adjustNewScale(newImageSize);
   }
 };
