@@ -24,7 +24,7 @@ const hashtagsElementInputHandler = function () {
     hashtagsElement.reportValidity();
     return isHashtagValid;
   }
-  const hashtags = hashtagsElement.value.trim().split(' ');
+  const hashtags = hashtagsElement.value.trim().split(' ').filter((item) => item.length);
   if (hashtags.length > MAX_HASHTAGS_QUANTITY) {
     setErrorMessage(`Нельзя указать больше ${MAX_HASHTAGS_QUANTITY} хэш-тегов`)
     return false;
