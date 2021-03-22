@@ -1,7 +1,5 @@
 const ESC_KEY = 'Escape' || 'Esc';
-const COMMENT_LENGTH = 140;
 const ALERT_DELAY_TIME = 5000;
-const getMaxLengthComment = (comment) => comment.length < COMMENT_LENGTH;
 
 //Источник: https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Math/random
 const getRandomNumber = function(min, max) {
@@ -82,4 +80,4 @@ const debounce = (cb, limit) => {
   }
 };
 
-export {getRandomNumber, getMaxLengthComment, ESC_KEY, effects, showAlert, debounce};
+export {getRandomNumber, ESC_KEY, effects, showAlert, debounce};
