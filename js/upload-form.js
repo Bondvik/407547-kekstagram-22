@@ -25,6 +25,13 @@ const charCounter = document.querySelector('.char-counter');
 const effectLevelElement = document.querySelector('.effect-level');
 const bodyElement = document.body;
 const uploaderElement = document.querySelector('#upload-file');
+const effectsPreviewElement = document.querySelectorAll('.effects__preview');
+
+const setEffectPreview = function (url) {
+  effectsPreviewElement.forEach((element) => {
+    element.style.backgroundImage = `url('${url}')`;
+  })
+}
 
 const uploadFormHandler = function () {
   const file = uploaderElement.files[0];
@@ -34,6 +41,7 @@ const uploadFormHandler = function () {
     const reader = new FileReader();
     reader.addEventListener('load', () => {
       uploadPreviewElement.src = reader.result;
+      setEffectPreview(reader.result);
     });
     reader.readAsDataURL(file);
   }
